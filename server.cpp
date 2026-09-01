@@ -89,6 +89,11 @@ string getUserList()
 	}
 	return result;
 }
+
+//Handling communication with a client
+void handleClient(int clientSocket)
+{
+	char buffer[BUFFER_SIZE];
 	
-		
-			
+	//prompt client for username
+	
