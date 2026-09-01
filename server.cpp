@@ -75,6 +75,20 @@ void removeClient(int clientSocket)
 		clients.end()
 		);
 }
+
+//Return a list of connected users
+string getUserList()
+{
+	lock_guard<mutex> lock(clientsMutex);
+	
+	string result = "\nConnected users:\n";
+	
+	for(const Client& client : clients)
+	{
+		result += "- " + client.username + "\n";
+	}
+	return result;
+}
 	
 		
 			
