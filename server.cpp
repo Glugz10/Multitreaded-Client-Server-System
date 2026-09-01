@@ -37,3 +37,24 @@ void sendMessage(int clientSocket, const string& message)
 		0
 	);
 	
+//sending a message to every connected client
+void broadcastMessage(const string& message, int senderSocket = -1)
+{
+	vector<int> clientSockets;
+	
+	{
+		lock_guard<mutex> lock(clientsMutex);
+		for (const Client& client : clients)
+		{
+			if(client.socket != senderSocket)
+			{
+				clientSockets.push_back(client.socket);
+			}
+		}
+	}
+	
+	for(int socket : clientSockets)
+	{
+		sendMessage(socet, message);
+	}
+}
