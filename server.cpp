@@ -58,3 +58,23 @@ void broadcastMessage(const string& message, int senderSocket = -1)
 		sendMessage(socet, message);
 	}
 }
+
+//Removing a client from the connected list
+void removeClient(int clientSocket)
+{
+	lock_guard<mutex> lock(clientsMutex);
+	
+	clients.erase(
+		remove_if(
+			clients.begin(),
+			clients.end(),
+			[clientSocket](const Client& client)
+			{
+				return client.socket == clientSocket;
+			});
+		clients.end()
+		);
+}
+	
+		
+			
