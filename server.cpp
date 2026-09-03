@@ -162,7 +162,33 @@ void handleClient(int clientSocket)
 		
 		string message( buffer, bytesReceived);
 		 
+	//Removing trail newLine Characters
+	while(!message.empty() && (message.back() =='\n' || message.back() == '\r'))
+	{
+		message.pop_back();
+	}
 	
+	//Quit command
+	if (message == "/quit")
+	{
+		break;
+	}
+	
+	 //User command
+	 if(message == "/users")
+	 {
+		 string userList = getUserList();
+		 sendMessage(clientSocket, userList);
+		 
+		 continue;
+	 }
+	 
+	 string formattedMessage = username + ": " + message + "\n";
+	 
+	 cout << formattedMessage;
+	 broadcastMessage(formattedMessage, clientSocket);
+ }
+ 
 	
 	
 	
