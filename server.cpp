@@ -270,6 +270,11 @@ int main()
 		cout << "New connection from " << clientIP << endl;
 		
 		//Create one thread for this client
+		thread clientThread(handleClient, clientSocket);
+		clientThread.detach();
+	}
+	close(serverSocket);
+	return 0;
 }
 
 	
