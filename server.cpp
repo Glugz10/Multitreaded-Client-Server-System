@@ -96,4 +96,21 @@ void handleClient(int clientSocket)
 	char buffer[BUFFER_SIZE];
 	
 	//prompt client for username
+	string request = "Enter your username: ";
+	sendMessage(clientSocket, request);
+	int bytesReceived = recv(
+		clientSocket, 
+		buffer,
+		BUFFER_SIZE,
+		0
+	);
 	
+	if(bytesReceived <= 0)
+	{
+		close(clientSockets);
+		return;	
+	}
+	
+	string username(buffer, bytesReceived);
+	
+	//Remove trailing newLine characters
