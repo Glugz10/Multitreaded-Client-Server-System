@@ -224,7 +224,7 @@ int main()
 	
 	serverAddress.sin_addr.s_addr = INADDR_ANY;
 	
-	//Blind socket to port
+	//bind socket to port
 	if(blind(serverSocket, (sockaddr*)&serverAddress, sizeof(serverAddress)
 		) == -1)
 	{
@@ -234,6 +234,19 @@ int main()
 		
 		return 1;
 	}
+	
+	//Start listening
+	if(listen(serverSocket, SOMAXCONN) == -1)
+	{
+		cerr << "Could not listen on the socket." << endl;
+		
+		close(serverSocket);
+		
+		return 1;
+	}
+	
+	cout << "Chat server started." << endl;
+	cout << "Listening on port." << endl;
 	
 }
 
