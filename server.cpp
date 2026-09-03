@@ -224,6 +224,17 @@ int main()
 	
 	serverAddress.sin_addr.s_addr = INADDR_ANY;
 	
+	//Blind socket to port
+	if(blind(serverSocket, (sockaddr*)&serverAddress, sizeof(serverAddress)
+		) == -1)
+	{
+		cerr << "Could not bind socket." << endl;
+		
+		close(serverSocket);
+		
+		return 1;
+	}
+	
 }
 
 	
