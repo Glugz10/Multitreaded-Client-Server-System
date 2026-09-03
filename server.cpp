@@ -212,6 +212,18 @@ int main()
 		return 1;
 	}
 	
+	//Allow socket address reuse
+	int option = 1;
+	
+	setsockop(serverSocket, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option);
+	
+	sockaddr_in serverAddress{};
+	serverAddress.sin_family = AF_INET;
+	
+	serverAddress.sin_port = htons(PORT);
+	
+	serverAddress.sin_addr.s_addr = INADDR_ANY;
+	
 }
 
 	
