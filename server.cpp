@@ -114,3 +114,45 @@ void handleClient(int clientSocket)
 	string username(buffer, bytesReceived);
 	
 	//Remove trailing newLine characters
+	while(!username.empty() && (username.back() == '\n' || username.back() == '\r'))
+	{
+		username.pop_back();
+	}
+	
+	//Add client to shared client list
+	{
+		lock_guard<mutex> lock(clientsMutex);
+		
+		Client newClient;
+		
+		newClient.socket = clientSocket;
+		newClient.username = username;
+		
+		clients.push_back(newClients);
+	}
+	
+	cout << username << " connected." << endl;
+	
+	string joinMessage = "\n[SERVER]" + username + " joined the chat. \n";
+	
+	broadcastingMessage(joinMessage, clientSocket);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
