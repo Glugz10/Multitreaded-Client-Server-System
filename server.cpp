@@ -138,9 +138,30 @@ void handleClient(int clientSocket)
 	broadcastingMessage(joinMessage, clientSocket);
 	
 	
+	string welcomeMessage = "\nWelcome, " + username + "!\n" 
+		"Commands:\n" 
+		"/users - show connected users\n"
+		"/quit - disconnected\n\n";
+		
+	sendMessage(clientSocket, welcomeMessage);
 	
-	
-	
+	//Receive messages from this client
+	while(true)
+	{
+		bytesReceived = recv(
+			clientSocket, 
+			buffer, 
+			BUFFER_SIZE, 
+			0
+		);
+		
+		if(bytesReceived <= 0)
+		{
+			break;
+		}
+		
+		string message( buffer, bytesReceived);
+		 
 	
 	
 	
