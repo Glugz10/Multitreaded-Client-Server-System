@@ -200,6 +200,19 @@ void handleClient(int clientSocket)
 	broadcastMessage(leaveMessage);
 }
 
+int main()
+{
+	//Creating TCP socket
+	int serverSocket = socket(AF_INET, SOCKET_STREAM, 0);
+	
+	if(serverSocket == -1)
+	{
+		cerr << "Could not create a socket" << endl;
+		
+		return 1;
+	}
+	
+}
 
 	
 	
