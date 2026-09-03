@@ -248,6 +248,28 @@ int main()
 	cout << "Chat server started." << endl;
 	cout << "Listening on port." << endl;
 	
+	//Continously accepts new clients
+	while(true)
+	{
+		sockaddr_in clientAddress{};
+		
+		socklen_t clientSize = sizeof(clientAddress);
+		
+		int clientSocket = accept(serverSocket, (sockaddr*)&clientAddress, &clientSize);
+		
+		if(clientSocket == -1)
+		{
+			cerr << "Failed to accept client." << endl;
+			continue;
+		}
+		
+		char clientIP[INET_ADDRSTRLEN];
+		
+		inet_ntop(AF_INET, &clientAddress.sin_addr, clientIP, INET_ADDRSTRLEN);
+		
+		cout << "New connection from " << clientIP << endl;
+		
+		//Create one thread for this client
 }
 
 	
