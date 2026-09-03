@@ -187,16 +187,20 @@ void handleClient(int clientSocket)
 	 
 	 cout << formattedMessage;
 	 broadcastMessage(formattedMessage, clientSocket);
- }
  
+	//Remove client from shared client list
+	removeClient(clientSocket);
+ 
+	//Release socket
+	close(clientSocket);
 	
+	cout << username << " disconnected" << endl;
 	
-	
-	
-	
-	
-	
-	
+	string leaveMessage = "\n[SERVER} " + username + " left the chat.\n"
+	broadcastMessage(leaveMessage);
+}
+
+
 	
 	
 	
