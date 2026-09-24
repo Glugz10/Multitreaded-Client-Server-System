@@ -11,7 +11,7 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 
-using namespace std:
+using namespace std;
 
 const string SERVER_IP = "127.0.0.1";
 const int PORT = 54000;
